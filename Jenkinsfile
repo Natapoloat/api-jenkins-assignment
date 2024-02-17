@@ -56,10 +56,10 @@ pipeline {
                     echo 'gitlab login & push'
                     sshCommand(remote: vm2, command: "cd api-jenkins-assignment/ \
                     && echo '1234' | sudo -S docker login registry.gitlab.com \
-                    && echo 'natapoloat' \
+                    && echo 'natapoloat12' \
                     && echo 'oat12982' \
-                    && echo '1234' | sudo -S docker build -t registry.gitlab.com/natapoloat/jenkins-api-unittest . \
-                    && echo '1234' | sudo -S docker push registry.gitlab.com/natapoloat/jenkins-api-unittest"
+                    && echo '1234' | sudo -S docker build -t registry.gitlab.com/natapoloat12/jenkins-api-unittest . \
+                    && echo '1234' | sudo -S docker push registry.gitlab.com/natapoloat12/jenkins-api-unittest"
                     )
 
                 }
@@ -69,12 +69,12 @@ pipeline {
             steps {
                 echo 'gitlab pull and create container'
                 sshCommand(remote: vm3, command: "echo '1234' | sudo -S docker login registry.gitlab.com \
-                    && echo 'natapoloat' \
+                    && echo 'natapoloat12' \
                     && echo 'oat12982' \
-                    && echo '1234' | sudo -S docker pull registry.gitlab.com/natapoloat/jenkins-api-unittest \
+                    && echo '1234' | sudo -S docker pull registry.gitlab.com/natapoloat12/jenkins-api-unittest \
                     && echo '1234' | sudo -S docker stop api \
                     && echo '1234' | sudo -S docker rm api \
-                    && echo '1234' | sudo -S docker run -d -p 8001:5000 --name api registry.gitlab.com/natapoloat/jenkins-api-unittest"
+                    && echo '1234' | sudo -S docker run -d -p 8001:5000 --name api registry.gitlab.com/natapoloat12/jenkins-api-unittest"
                     )
 
             }
