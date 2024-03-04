@@ -18,6 +18,10 @@ vm3.allowAnyHosts = true
 pipeline {
     agent any
 
+     environment {
+        VM = credentials('vm-id')
+    }
+
     stages {
         stage('UnitTest on Vm2') {
             steps {
@@ -33,14 +37,12 @@ pipeline {
         }
         stage('Build on Vm2') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'my-id', keyFileVariable: 'SSH_KEY')]) {
-                    script {
-                        echo 'Building..'
-                        sshCommand remote: vm2, user: 'your-ssh-username', key: [$class: 'FileKeyVerificationStrategy', comment: '', privateKey: env.SSH_KEY], command: "cd api-jenkins-assignment/ && sudo -S docker-compose up -d --build"
+                script {
+                    echo 'Building..'
+                    sshCommand(remote: vm2, command: "cd api-jenkins-assignment/ && echo '1234' | sudo -S docker-compose up -d --build")
+                }
             }
         }
-    }
-}
         stage('RobotTest on Vm2') {
             steps {
                 script {
