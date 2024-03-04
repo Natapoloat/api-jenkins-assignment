@@ -28,7 +28,7 @@ class TestApp(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn('result', data)
-        self.assertTrue(data['is_prime'])
+        self.assertTrue(data['result'])
 
 if __name__ == '__main__':
     unittest.main()
