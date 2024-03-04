@@ -36,7 +36,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'my-id', keyFileVariable: 'SSH_KEY')]) {
                     script {
                         echo 'Building..'
-                        sshCommand remote: vm2, user: 'your-ssh-username', key: [$class: 'FileKeyVerificationStrategy', comment: '', privateKey: env.SSH_KEY], command: "cd api-jenkins-assignment/ && sudo docker-compose up -d --build"
+                        sshCommand remote: vm2, user: 'your-ssh-username', key: [$class: 'FileKeyVerificationStrategy', comment: '', privateKey: env.SSH_KEY], command: "cd api-jenkins-assignment/ && sudo -S docker-compose up -d --build"
             }
         }
     }
