@@ -14,7 +14,7 @@ def hello():
 def plus(num1,num2):
     return {"result":(float(num1)+float(num2))}
 
-@app.route("/is_prime/<int: x>")
+@app.route("/is_prime/<int:x>")
 def prime(x):
     if x <= 1:
         return {'result' : False}
