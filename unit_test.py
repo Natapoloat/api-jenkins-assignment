@@ -22,5 +22,13 @@ class TestApp(unittest.TestCase):
         self.assertIn('result', data)
         self.assertEqual(data['result'], 1)
 
+    def test_true_when_x_is_17(self):
+        response = self.app.get('/is_prime/17')
+        data = response.get_json()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('result', data)
+        self.assertTrue(data['is_prime'])
+
 if __name__ == '__main__':
     unittest.main()
