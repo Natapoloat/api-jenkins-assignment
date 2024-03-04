@@ -33,12 +33,14 @@ pipeline {
         }
         stage('Build on Vm2') {
             steps {
-                script {
-                    echo 'Building..'
-                    sshCommand(remote: vm2, command: "cd api-jenkins-assignment/ && echo '1234' | sudo -S docker-compose up -d --build")
-                }
+                withCredentials([sshUserPrivateKey(credentialsId: 'my-id', keyFileVariable: 'SSH_KEY')]) {
+                    script {
+                        echo 'Building..'
+                        sshCommand remote: vm2, user: 'natapol', key: [$class: 'FileKeyVerificationStrategy', comment: '', privateKey: env.SSH_KEY], command: "cd api-jenkins-assignment/ && echo '1234' | sudo -S docker-compose up -d --build"
             }
         }
+    }
+}
         stage('RobotTest on Vm2') {
             steps {
                 script {
